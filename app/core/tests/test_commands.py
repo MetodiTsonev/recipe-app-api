@@ -6,9 +6,9 @@ from django.core.management import call_command
 from django.db.utils import OperationalError
 from django.test import SimpleTestCase
 
+
 @patch('core.management.commands.wait_for_db.Command.check')
 class CommandTests(SimpleTestCase):
-
 
     def test_wait_for_db_ready(self, patched_check):
         """Test waiting for db when it's available"""
@@ -23,7 +23,7 @@ class CommandTests(SimpleTestCase):
         """Test waiting for db with delay"""
         patched_check.side_effect = [Psycopg2Error] * 2 + \
             [OperationalError] * 3 + [True]
-        
+
         call_command('wait_for_db')
 
         self.assertEqual(patched_check.call_count, 6)
