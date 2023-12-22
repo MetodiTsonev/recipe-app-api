@@ -5,11 +5,12 @@ Django Admin Customization
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from core import models
-#Future Proofing
+# Future Proofing
 from django.utils.translation import gettext_lazy as _
 
+
 class UserAdmin(BaseUserAdmin):
-    """Define th admin pages for users"""
+    """Define the admin pages for users"""
     ordering = ['id']
     list_display = ('email', 'name')
     fieldsets = (
@@ -24,12 +25,15 @@ class UserAdmin(BaseUserAdmin):
                 )
             }
         ),
-        (_('Important dates'),{'fields': ('last_login',)}),
+        (_('Important dates'), {'fields': ('last_login',)}),
     )
-    # add the fields that we want to be able to edit from the admin page
+    # Add the fields that we want to be able to edit from the admin page
     readonly_fields = ('last_login',)
     # Now register this new user admin class with our User model.
-    # This tells Django that we want to use our custom UserAdmin class instead of the built-in one.
+
+    '''This tells Django that we want to
+    use our custom UserAdmin class instead of the built-in one.'''
+
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
@@ -41,8 +45,9 @@ class UserAdmin(BaseUserAdmin):
                 'is_active',
                 'is_staff',
                 'is_superuser',
-                )
+            )
         }),
     )
+
 
 admin.site.register(models.User, UserAdmin)
