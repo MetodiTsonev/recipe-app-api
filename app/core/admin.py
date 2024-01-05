@@ -29,7 +29,7 @@ class UserAdmin(BaseUserAdmin):
         (_('Important dates'), {'fields': ('last_login',)}),
     )
     # Add the fields that we want to be able to edit from the admin page
-    readonly_fields = ['last_login',]
+    readonly_fields = ['last_login', ]
     # Now register this new user admin class with our User model.
 
     '''This tells Django that we want to
