@@ -12,9 +12,10 @@ from django.utils.translation import gettext_lazy as _
 class UserAdmin(BaseUserAdmin):
     """Define the admin pages for users"""
     ordering = ['id']
-    list_display = ('email', 'name')
+    list_display = ['email', 'name']
     fieldsets = (
         (None, {'fields': ('email', 'password')}),
+        (_('Personal Info'), {'fields': ('name',)}),
         (
             _('Permissions'),
             {
@@ -28,7 +29,7 @@ class UserAdmin(BaseUserAdmin):
         (_('Important dates'), {'fields': ('last_login',)}),
     )
     # Add the fields that we want to be able to edit from the admin page
-    readonly_fields = ('last_login',)
+    readonly_fields = ['last_login',]
     # Now register this new user admin class with our User model.
 
     '''This tells Django that we want to
@@ -45,7 +46,7 @@ class UserAdmin(BaseUserAdmin):
                 'is_active',
                 'is_staff',
                 'is_superuser',
-            )
+            ),
         }),
     )
 

@@ -8,24 +8,24 @@ from django.urls import reverse
 from django.test import Client
 
 
-class AdminSiteTest(TestCase):
+class AdminSiteTests(TestCase):
 
     def setUp(self):
         # Create a user before each test
         self.client = Client()
         self.admin_user = get_user_model().objects.create_superuser(
             email='admin@example.com',
-            password='testpass123'
+            password='testpass123',
         )
         self.client.force_login(self.admin_user)
         # Make sure the client is logged in as admin
         self.user = get_user_model().objects.create_user(
-            email="normal@user.com",
-            password="testpass123",
-            name="Normal User"
+            email="user@example.com",
+            password='testpass123',
+            name="Test User"
         )
 
-    def test_users_list(self):
+    def test_users_lists(self):
         """Test that users are listed on the user page."""
         url = reverse('admin:core_user_changelist')
         res = self.client.get(url)
